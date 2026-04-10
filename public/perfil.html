@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="inicio.html">Mi Sitio</a>
+    <div>
+      <a class="nav-link text-white d-inline" href="inicio.html">Inicio</a>
+      <a class="nav-link text-white d-inline" href="perfil.html">Perfil</a>
+      <a class="nav-link text-white d-inline" href="usuarios.html">Usuarios</a>
+      <a class="nav-link text-white d-inline" href="productos.html">Productos</a>
+      <a class="nav-link text-white d-inline" href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h1>Mi Perfil</h1>
+  <div class="card p-4 mt-3" style="max-width: 400px;">
+    <p><strong>Usuario:</strong> <span id="perfil-username"></span></p>
+    <p><strong>Nombre:</strong> <span id="perfil-nombre"></span></p>
+    <p><strong>Email:</strong> <span id="perfil-email"></span></p>
+    <p><strong>Rol:</strong> <span id="perfil-rol"></span></p>
+    <p><strong>Nivel:</strong> <span id="perfil-nivel"></span></p>
+    <p><strong>XP:</strong> <span id="perfil-xp"></span></p>
+  </div>
+  <div id="error-msg" class="alert alert-danger mt-3 d-none"></div>
+</div>
+
+<script>
+  const API = "http://localhost:3000";
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  if (!userData) {
+    window.location.href = "index.html";
+  }
+
+  fetch(`${API}/users/${userData.id}`)
+    .then(res => res.json())
+    .then(user => {
+      document.getElementById("perfil-username").textContent = user.username;
+      document.getElementById("perfil-nombre").textContent = `${user.first_name} ${user.last_name}`;
+      document.getElementById("perfil-email").textContent = user.email || "—";
+      document.getElementById("perfil-rol").textContent = user.role;
+      document.getElementById("perfil-nivel").textContent = user.nivel;
+      document.getElementById("perfil-xp").textContent = user.xp;
+    })
+    .catch(() => {
+      const err = document.getElementById("error-msg");
+      err.textContent = "No se pudo cargar el perfil.";
+      err.classList.remove("d-none");
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

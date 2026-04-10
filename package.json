@@ -1,0 +1,23 @@
+{
+  "name": "html",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/A01413139/tc2005b.html#readme",
+  "bugs": {
+    "url": "https://github.com/A01413139/tc2005b.html/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A01413139/tc2005b.html.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
